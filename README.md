@@ -22,7 +22,10 @@ docker run --name jeedom-mysql -v /opt/jeedom/mysql/:/var/lib/mysql -e MYSQL_ROO
 # create the jeedom instance
 docker create --net host --name jeedom-server \
 --cap-add=NET_ADMIN --device /dev/net/tun:/dev/net/tun  # for openvpn\
--v /opt/jeedom/html:/var/www/html -e ROOT_PASSWORD=<your_passwd> -e APACHE_PORT=80 -e SSH_PORT=22 -e MODE_HOST=1 --restart always nricheton/jeedom-rpi
+-v /opt/jeedom/html:/var/www/html\
+-e ROOT_PASSWORD=<your_passwd> \
+-e APACHE_PORT=80 -e SSH_PORT=22 -e MODE_HOST=1\
+--restart always nricheton/jeedom-rpi
 
-docker start jeedom-server-tst
+docker start jeedom-server
 ```
