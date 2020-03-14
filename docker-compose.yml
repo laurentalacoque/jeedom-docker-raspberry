@@ -25,7 +25,7 @@ services:
       SSH_PORT: 22
       MODE_HOST: 1
     devices:
-            - /dev/net/tun:/dev/net/tun
+            - /dev/net/tun:/dev/net/tun  # useful for openvpn module
     volumes:
             - /opt/jeedom2/html:/var/www/html
     depends_on:
