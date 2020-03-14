@@ -1,0 +1,32 @@
+version: '2'
+
+services:
+  db:
+    container_name: jeedom_mysql
+    restart: always
+    image: hypriot/rpi-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: 'jeedom'
+      MYSQL_USER: 'jeedom'
+      MYSQL_PASS: 'jeedom'
+    volumes:
+      - /opt/jeedom2/mysql:/var/lib/mysql
+    ports:
+      - "3306:3306"
+
+  jeedom:
+    container_name: jeedom_server
+    restart: always
+    network_mode: "host"
+    image: nricheton/jeedom-rpi 
+    environment:
+      ROOT_PASSWORD: 'jeedom'
+      APACHE_PORT: 80
+      SSH_PORT: 22
+      MODE_HOST: 1
+    devices:
+            - /dev/net/tun:/dev/net/tun
+    volumes:
+            - /opt/jeedom2/html:/var/www/html
+    depends_on:
+      - db
